@@ -1083,6 +1083,9 @@ main{
     margin-bottom: 20px;
     line-height: 1.5;
 }
+.contact-mobile-br{
+    display: none;
+}
 .contact-info .info-txt p{
     font-size: clamp(0.875rem, 1.2vw, 1.3rem);
     line-height: 1.5;
@@ -1439,7 +1442,9 @@ main{
     }
     .contact-info .info-txt p{
         font-size: clamp(0.75rem, 1.4vw, 0.875rem);
-        line-height: 1.5;
+        line-height: 1.6;
+        word-break: keep-all;
+        overflow-wrap: anywhere;
     }
 }
 
@@ -1798,6 +1803,9 @@ main{
         font-size: clamp(0.875rem, 4vw, 1rem);
         margin-bottom: 6px;
         line-height: 1.4;
+    }
+    .contact-mobile-br{
+        display: block;
     }
     .contact-info .info-txt p{
         font-size: clamp(0.75rem, 3vw, 0.875rem);
