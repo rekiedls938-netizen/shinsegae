@@ -1,4 +1,10 @@
 $(document).ready(function(){
+    $(".contact-link").click(function(e){
+        if($(this).attr("href") == ""){
+            e.preventDefault();
+        }
+    });
+
     // Core 카드 목록이 화면에 들어오면 한 번 실행
     let coreList = document.querySelector(".core-wrap > ul");
 
@@ -67,10 +73,30 @@ $(document).ready(function(){
         }
     });
 
+    // 1024px 이하에서만 3초마다 자동 전환
+    let heroTimer = null;
+    let heroMedia = window.matchMedia("(max-width: 1024px)");
+
+    function heroAuto(){
+        clearInterval(heroTimer);
+        heroTimer = null;
+
+        if(heroMedia.matches){
+            heroTimer = setInterval(function(){
+                i++;
+                if(i >= heroItems.length){ i = 0; }
+                heroMove();
+            }, 3000);
+        }
+    }
+
+    heroMedia.addEventListener("change", heroAuto);
+
     $(window).resize(function(){
         heroMove();
     });
     heroMove();
+    heroAuto();
 
     // 햄버거 메뉴 열기
     $(".h-icon > a:first-child").click(function(e){
@@ -123,6 +149,15 @@ $(document).ready(function(){
         $(".tab-content-wrap > li").eq(i).addClass("active");
     });
 
+    setInterval(function(){
+        let i = $(".tab-menu > li.active").index();
+        let total = $(".tab-menu > li").length;
+
+        i++;
+        if(i >= total){ i = 0; }
+
+        $(".tab-menu > li").eq(i).trigger("click");
+    }, 2000);
 
 // 모바일 Food ON 이전 / 다음
     $(".food-arrow > div").click(function(){
