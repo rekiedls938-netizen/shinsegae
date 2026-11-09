@@ -245,6 +245,11 @@ header{
     .header-inner > a{
         width: 200px;
     }
+    .header-warp .h-icon{
+        width: 100%;
+        justify-content: space-between;
+        gap: 0;
+    }
     .header-warp .h-icon a{
         width: 40px;
     }
@@ -254,7 +259,6 @@ header{
     .header-warp .h-icon a img{
         width: 24px;
     }
-    .header-warp .h-icon a:nth-child(2),
     .header-warp .gnb{
         display: none;
     }
@@ -511,8 +515,7 @@ main{
 }
 .core-wrap .core-txt{
     position: absolute;
-    left: 0;
-    top: 0;
+    left: 0; top: 0;
     width: 30.5%;
     height: 100%;
     padding: 20px;
@@ -531,7 +534,7 @@ main{
     aspect-ratio: 1440 / 550;
 }
 .core-wrap .core-txt h3{
-    font-size: clamp(1.125rem, 2.4vw, 2.4rem);
+    font-size: clamp(1.125rem, 2.4vw, 2.5rem);
     line-height: 1.3;
     font-family: 'Montagu Slab', serif;
     font-weight: 400;
@@ -540,7 +543,7 @@ main{
 }
 .core-wrap .core-txt p{
     text-align: center;
-    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    font-size: clamp(1rem, 1.67vw, 1.5rem);
     line-height: 1.7;
 }
 .core-wrap ul{
@@ -603,7 +606,7 @@ main{
 }
 .core-wrap ul li .core-text p{
     text-align: center;
-    font-size: clamp(0.875rem, 1.25vw, 1.125rem);
+    font-size: clamp(1rem, 1.67vw, 1.5rem);
     line-height: 1.7;
 }
 .core-wrap ul li:nth-child(3) .core-text p{
@@ -942,6 +945,21 @@ main{
     object-position: center bottom;
     cursor: pointer;
 }
+/* 스크롤 진입 후 현재 탭의 브랜드 이미지만 공개 */
+.brands-content.reveal-ready .brands-img > img{
+    clip-path: inset(100% 0 0 0);
+}
+.brands-content.is-visible > ul.active .brands-img > img{
+    animation: brand-reveal 0.9s ease both;
+}
+@keyframes brand-reveal{
+    0%{
+        clip-path: inset(100% 0 0 0);
+    }
+    100%{
+        clip-path: inset(0 0 0 0);
+    }
+}
 .brands-content > ul:nth-child(2) > li:first-child .brands-img > img{
     height: auto;
     aspect-ratio: 424 / 544;
@@ -960,8 +978,6 @@ main{
     max-width: 100%;
     margin: 0 auto;
     text-align: left;
-    word-break: keep-all;
-    overflow-wrap: anywhere;
 }
 .brands-content ul li .brands-text > h3{
     position: relative;
@@ -1051,6 +1067,9 @@ main{
     margin: 0 auto;
     margin-bottom: clamp(112px, 9vw, 144px);
 }
+.contact h1{
+    overflow-wrap: anywhere;
+}
 .contact-list{
     width: 100%;
     border-top: 1px solid #ccc;
@@ -1061,7 +1080,7 @@ main{
 .contact-link{
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: clamp(20px, 2.2vw, 32px);
     padding: 28px 8px;
 }
 .contact-num{
@@ -1075,6 +1094,8 @@ main{
     flex: 1;
     min-width: 0;
     text-align: left;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
 }
 .contact-info .info-txt h3{
     font-size: clamp(1.125rem, 1.8vw, 1.5rem);
@@ -1099,8 +1120,8 @@ main{
 .contact-list .list-1,
 .contact-list .list-2,
 .contact-list .list-3{
-    width: 300px;
-    height: 120px;
+    width: clamp(160px, 23vw, 300px);
+    aspect-ratio: 5 / 2;
     flex-shrink: 0;
     background-repeat: no-repeat;
     background-position: center;
@@ -1150,7 +1171,6 @@ main{
         height: 36px;
     }
     /* ---------------Brands----------------- */
-    /* -----------------식문화----------------- */
 }
 
 @media (max-width: 1280px){
@@ -1164,7 +1184,6 @@ main{
 }
 
 @media (max-width: 1024px){
-    /* 히어로 로고 캐러셀 */
     .hero-bg{
         background-image: url(../images/food/hero-tablet.png);
         background-size: cover;
@@ -1230,7 +1249,6 @@ main{
     .hero .hero-brands ul li.active > img:nth-child(2){
         filter: brightness(0);
     }
-    /* 캐러셀에서는 배경 없는 글자 로고 사용 */
     .hero .hero-brands ul li:nth-child(7) > img:nth-child(2){
         content: url(../images/food/food-text3.png);
     }
@@ -1296,7 +1314,7 @@ main{
         font-size: clamp(1rem, 2.3vw, 1.5rem);
     }
     .core-wrap .core-txt p{
-        font-size: clamp(0.875rem, 1.7vw, 1.125rem);
+        font-size: clamp(0.9375rem, calc(1.7vw + 1px), 1.1875rem);
         line-height: 1.6;
     }
     .core-wrap ul{
@@ -1314,7 +1332,7 @@ main{
         font-size: clamp(1rem, 2.4vw, 1.375rem);
     }
     .core-wrap ul li .core-text p{
-        font-size: clamp(0.75rem, 1.6vw, 1rem);
+        font-size: clamp(0.8125rem, calc(1.6vw + 1px), 1.0625rem);
         line-height: 1.6;
         word-break: keep-all;
         overflow-wrap: anywhere;
@@ -1420,8 +1438,7 @@ main{
     .contact-list .list-1,
     .contact-list .list-2,
     .contact-list .list-3{
-        width: 160px;
-        height: 96px;
+        width: clamp(96px, 24vw, 200px);
     }
 }
 
@@ -1446,14 +1463,20 @@ main{
         font-size: clamp(0.75rem, 2.3vw, 1.125rem);
     }
     .core-wrap .core-txt p{
-        font-size: clamp(0.6875rem, 1.7vw, 0.875rem);
+        font-size: clamp(0.75rem, calc(1.7vw + 1px), 0.9375rem);
+    }
+    .core-wrap ul li .core-text{
+        top: 13%;
+        padding: 0 6px;
     }
     .core-wrap ul li .core-text h3,
     .core-wrap ul li:nth-child(2) .core-text h3{
         font-size: clamp(0.75rem, 2.2vw, 1.125rem);
+        margin-bottom: clamp(8px, 1.5vw, 12px);
     }
     .core-wrap ul li .core-text p{
-        font-size: clamp(0.625rem, 1.7vw, 0.875rem);
+        font-size: clamp(0.6875rem, calc(1.7vw + 1px), 0.9375rem);
+        line-height: 1.5;
     }
     /* ---------------Brands----------------- */
     .brands-tab{
@@ -1466,12 +1489,6 @@ main{
     /* -----------------식문화----------------- */
     .contact-link{
         gap: 16px;
-    }
-    .contact-list .list-1,
-    .contact-list .list-2,
-    .contact-list .list-3{
-        width: 120px;
-        height: 80px;
     }
 }
 
@@ -1561,7 +1578,7 @@ main{
         margin-bottom: 16px;
     }
     .m-taste-wrap .core-txt p{
-        font-size: clamp(0.875rem, 3.6vw, 1rem);
+        font-size: clamp(0.9375rem, calc(3.6vw + 1px), 1.0625rem);
         line-height: 1.6;
     }
     .m-con-wrap{
@@ -1593,7 +1610,7 @@ main{
         margin-bottom: 16px;
     }
     .m-con-wrap .core-text p{
-        font-size: clamp(0.875rem, 3.6vw, 1rem);
+        font-size: clamp(0.9375rem, calc(3.6vw + 1px), 1.0625rem);
         line-height: 1.6;
     }
     /* ------------------Food ON------------------ */
@@ -1702,7 +1719,7 @@ main{
         font-size: clamp(1.25rem, 5vw, 1.75rem);
     }
     .contact-link{
-        gap: 10px;
+        gap: clamp(8px, 2vw, 12px);
         padding: 24px 0;
     }
     .contact-num{
@@ -1716,12 +1733,6 @@ main{
     .contact-info .info-txt p{
         font-size: clamp(0.75rem, 3vw, 0.875rem);
         line-height: 1.6;
-    }
-    .contact-list .list-1,
-    .contact-list .list-2,
-    .contact-list .list-3{
-        width: 64px;
-        height: 56px;
     }
     .contact-arrow{
         width: 22px;
