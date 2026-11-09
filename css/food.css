@@ -533,6 +533,8 @@ main{
     flex: 1;
     min-width: 0;
     transform-origin: center top;
+}
+.core-wrap ul.is-visible > li{
     animation: core-show1 1.2s ease-out both;
 }
 .core-wrap ul li:nth-child(1) .convenience{
@@ -817,6 +819,7 @@ main{
 }
 .brands-tab li{
     flex: 1;
+    min-width: 0;
 }
 .brands-tab .button {
     display: flex;
@@ -858,6 +861,7 @@ main{
     border-radius: 50%;
     background-color: #1a1a1a;
     object-fit: contain;
+    transition: 0.3s;
 }
 .brands-tab .button li:nth-child(2){
     padding: 10px;
@@ -880,7 +884,7 @@ main{
     min-width: 0;
 }
 .brands-content ul li .brands-img{
-    width: 200px;
+    width: clamp(140px, 15vw, 200px);
     max-width: 100%;
     margin: 0 auto;
     aspect-ratio: 220 / 320;
@@ -896,43 +900,52 @@ main{
     object-position: center bottom;
     cursor: pointer;
 }
+.brands-content > ul:nth-child(2) > li:first-child .brands-img > img{
+    height: auto;
+    aspect-ratio: 424 / 544;
+    object-fit: cover;
+    object-position: center;
+}
 .brands-content > ul:nth-child(4) .brands-img{
-    width: 240px;
+    width: clamp(160px, 18vw, 240px);
     aspect-ratio: 3 / 2;
 }
 .brands-content ul li .brands-text{
     text-align: center;
 }
 .brands-content ul li .brands-text > h3{
-    font-size: clamp(1.5rem, 2.5vw, 1.75rem);
-    margin-top: 20px;
+    position: relative;
+    width: fit-content;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: clamp(1rem, calc(0.5rem + 1.4vw), 1.75rem);
+    line-height: 1.4;
+    margin-top: clamp(12px, 2vw, 20px);
     margin-bottom: 10px;
 }
 .brands-content ul li .brands-text .brands-line{
-    position: relative;
-    width: 50%;
-    max-width: 130px;
     height: 3px;
     margin: 0 auto;
 }
-.brands-content ul li .brands-text .brands-line::after{
+.brands-content ul li .brands-text > h3::after{
     content: "";
     display: block;
     width: 0;
     height: 3px;
     background-color: #1a1a1a;
     position: absolute;
-    left: 50%; top: 0;
-    transition: width 0.3s, left 0.3s;
+    left: 50%; bottom: -13px;
+    transition: 0.3s;
 }
-.brands-content ul li:hover .brands-line::after{
+.brands-content ul li:hover .brands-text > h3::after{
     width: 100%;
     left: 0;
 }
 .brands-content ul li .brands-text > p{
-    font-size: clamp(1.125rem, 1.4vw, 1.3rem);
-    margin-top: 24px;
-    line-height: 30px;
+    font-size: clamp(0.8125rem, 1.4vw, 1.3rem);
+    margin-top: clamp(12px, 2vw, 24px);
+    line-height: 1.6;
 }
 .brands-btn{
     width: fit-content;
@@ -1319,6 +1332,9 @@ main{
     .core-wrap ul li .core-text h3{
         margin-bottom: 20px;
     }
+    .core-wrap ul li:nth-child(2) .core-text h3{
+        letter-spacing: normal;
+    }
     .core-wrap ul li .core-text p{
         line-height: 1.6;
     }
@@ -1376,12 +1392,13 @@ main{
         width: calc(50% - 20px);
     }
     .brands-content ul li .brands-img{
-        width: 220px;
+        width: clamp(160px, 25vw, 220px);
     }
     .brands-content ul li .brands-text > h3{
         margin-top: 24px;
     }
     .brands-content ul li .brands-text > p{
+        font-size: clamp(0.875rem, 1.8vw, 1.125rem);
         margin-top: 24px;
         line-height: 1.6;
     }
@@ -1488,13 +1505,13 @@ main{
 @media (max-width: 600px){
     /* --------------매인영역---------------- */
     .hero{
-        margin-bottom: 72px;
+        margin-bottom: clamp(88px, 18vw, 104px);
     }
     .core h1,
     .food-on h1,
     .brands h1,
     .contact h1{
-        margin-bottom: clamp(36px, 8vw, 48px);
+        margin-bottom: clamp(44px, 10vw, 56px);
     }
     main{
         padding-top: 56px;
@@ -1532,7 +1549,7 @@ main{
     /* ---------------core value------------ */
     .core{
         width: calc(100% - 40px);
-        margin-bottom: 72px;
+        margin-bottom: clamp(88px, 18vw, 104px);
     }
     .core h1{
         font-size: clamp(1.5rem, 6vw, 2rem);
@@ -1609,7 +1626,7 @@ main{
     /* ------------------Food ON------------------ */
     .food-on{
         width: calc(100% - 40px);
-        margin-bottom: 72px;
+        margin-bottom: clamp(88px, 18vw, 104px);
     }
     .food-on h1{
         font-size: clamp(1.5rem, 6vw, 2rem);
@@ -1646,21 +1663,22 @@ main{
     /* ---------------Brands----------------- */
     .brands{
         width: calc(100% - 40px);
-        margin-bottom: 72px;
+        margin-bottom: clamp(88px, 18vw, 104px);
     }
     .brands h1{
         font-size: clamp(1.5rem, 6vw, 2rem);
     }
     .brands-tab{
         width: 100%;
-        flex-wrap: wrap;
-        gap: 32px 24px;
-        margin-bottom: 0;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 8px;
+        margin-bottom: clamp(40px, 9vw, 48px);
     }
     .brands-tab > li{
-        flex: none;
-        width: calc(50% - 30px);
-        transform: translate(10%);
+        flex: 1;
+        min-width: 0;
+        transform: none;
     }
     .brands-tab .button li{
         flex: none;
@@ -1669,20 +1687,70 @@ main{
         width: 120px;
         max-width: 100%;
         padding: 20px;
+        display: none;
     }
     .brands-tab .button li:nth-child(2){
-        margin-top: 12px;
-        font-size: clamp(0.75rem, 3.5vw, 1rem);
+        width: 100%;
+        height: 56px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0;
+        font-size: clamp(0.75rem, 2.5vw, 0.875rem);
+        line-height: 1.4;
+        text-align: center;
+        overflow-wrap: anywhere;
+        border: 1px solid #1A1A1A;
+        background-color: #1A1A1A;
+        border-radius: 10px;
+        padding: 8px 4px;
+        color: #f2f2f2;
+    }
+    .brands-tab > li.active .button li:nth-child(2){
+        background-color: #f2f2f2;
+        color: #1A1A1A;
     }
     .brands-content{
+        display: block;
+    }
+    .brands-content > ul{
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 16px;
+    }
+    .brands-content > ul > li{
+        width: calc(50% - 8px);
+    }
+    .brands-content ul li .brands-img{
+        width: clamp(120px, 32vw, 190px);
+    }
+    .brands-content > ul:nth-child(4) .brands-img{
+        width: 100%;
+        max-width: 220px;
+    }
+    .brands-content ul li .brands-text > h3{
+        font-size: clamp(1rem, 3.8vw, 1.25rem);
+        margin-top: clamp(12px, 3vw, 18px);
+    }
+    .brands-content ul li .brands-text > p{
+        font-size: clamp(0.8125rem, 3vw, 1rem);
+        margin-top: clamp(12px, 3vw, 18px);
+    }
+    .brands-content ul li:nth-child(3),
+    .brands-content ul li:nth-child(4){
         display: none;
     }
     .brands-btn{
-        display: none;
+        display: flex;
+        margin-top: clamp(36px, 9vw, 48px);
+        padding: 0.65em 1.2em;
+        gap: 1.2em;
+        font-size: clamp(0.75rem, 2.8vw, 0.875rem);
     }
     /* -----------------식문화----------------- */
     .contact{
-        margin-bottom: 50px;
+        margin-bottom: clamp(88px, 18vw, 104px);
         width: calc(100% - 40px);
     }
     .contact h1{
@@ -1690,7 +1758,7 @@ main{
     }
     .contact-list{
         flex-direction: column;
-        gap: 16px;
+        gap: 24px;
         padding: 0;
     }
     .contact-list > li{

@@ -1,4 +1,23 @@
 $(document).ready(function(){
+    // Core 카드 목록이 화면에 들어오면 한 번 실행
+    let coreList = document.querySelector(".core-wrap > ul");
+
+    if(coreList && "IntersectionObserver" in window){
+        let coreObserver = new IntersectionObserver(function(entries){
+            entries.forEach(function(entry){
+                if(entry.isIntersecting){
+                    entry.target.classList.add("is-visible");
+                    coreObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            rootMargin: "0px 0px -10% 0px",
+            threshold: 0
+        });
+
+        coreObserver.observe(coreList);
+    }
+
     // 1024px 이하 히어로 로고 캐러셀
     let i = 0;
     let heroItems = $(".hero-brands ul > li");
