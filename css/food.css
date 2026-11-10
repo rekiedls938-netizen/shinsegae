@@ -1063,7 +1063,7 @@ main{
 /* -----------------식문화----------------- */
 .contact{
     width: calc(100% - 60px);
-    max-width: 1440px;
+    max-width: 1380px;
     margin: 0 auto;
     margin-bottom: clamp(112px, 9vw, 144px);
 }
@@ -1081,7 +1081,7 @@ main{
     display: flex;
     align-items: center;
     gap: clamp(20px, 2.2vw, 32px);
-    padding: 28px 8px;
+    padding: 10px 8px;
 }
 .contact-num{
     width: 32px;
@@ -1120,7 +1120,7 @@ main{
 .contact-list .list-1,
 .contact-list .list-2,
 .contact-list .list-3{
-    width: clamp(160px, 23vw, 300px);
+    width: clamp(160px, 23vw, 350px);
     aspect-ratio: 5 / 2;
     flex-shrink: 0;
     background-repeat: no-repeat;
