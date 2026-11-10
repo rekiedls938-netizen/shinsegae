@@ -88,7 +88,6 @@ $(document).ready(function(){
 // 1024px 셋인터벌
     function heroAuto(){
         clearInterval(heroTimer);
-        heroTimer = null;
 
         if(heroMedia.matches){
             heroTimer = setInterval(heroNext, 2000);
@@ -97,9 +96,7 @@ $(document).ready(function(){
 
     heroMedia.addEventListener("change", heroAuto);
 
-    $(window).resize(function(){
-        heroMove();
-    });
+    $(window).resize(heroMove);
     heroMove();
     heroAuto();
 
@@ -149,6 +146,7 @@ $(document).ready(function(){
     // Food ON 탭메뉴
     let foodTabs = $(".tab-menu > li");
     let foodContents = $(".tab-content-wrap > li");
+    let foodTimer;
 
     foodTabs.click(function(){
         let i = $(this).index();
@@ -158,17 +156,27 @@ $(document).ready(function(){
 
         foodContents.removeClass("active");
         foodContents.eq(i).addClass("active");
+        foodAuto();
     });
 
-    setInterval(function(){
-        let i = foodTabs.filter(".active").index();
-        let total = foodTabs.length;
+    function foodAuto(){
+        clearInterval(foodTimer);
+        foodTimer = setInterval(function(){
+            let i = foodTabs.filter(".active").index();
+            let total = foodTabs.length;
 
-        i++;
-        if(i >= total){ i = 0; }
+            i++;
+            if(i >= total){ i = 0; }
 
-        foodTabs.eq(i).trigger("click");
-    }, 2000);
+            foodTabs.eq(i).trigger("click");
+        }, 3000);
+    }
+
+    foodAuto();
+
+    foodTabs.on("mouseenter", function(){
+        clearInterval(foodTimer);
+    });
 
 // 모바일 Food ON 이전 / 다음
     $(".food-arrow > div").click(function(){

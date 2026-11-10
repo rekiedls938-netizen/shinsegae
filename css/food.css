@@ -293,7 +293,7 @@ main{
     padding-top: 100px;
 }
 .hero{
-    margin-bottom: clamp(120px, 10vw, 160px);
+    margin-bottom: clamp(120px, 10vw, 200px);
 }
 .hero-bg{
     background-image: url("../images/food/hero2.png");
@@ -310,7 +310,6 @@ main{
     position: absolute;
     left: 40%;top: 47%;
     filter: brightness(0) invert(1);
-
 }
 .hero-brands ul > li img{
     transform: translateY(-50%);
@@ -494,7 +493,7 @@ main{
     width: calc(100% - 60px);
     max-width: 1440px;
     margin: 0 auto;
-    margin-bottom: clamp(112px, 9vw, 144px);
+    margin-bottom: clamp(120px, 10vw, 200px);
 }
 .core h1,
 .food-on h1,
@@ -644,7 +643,7 @@ main{
     width: calc(100% - 60px);
     max-width: 1440px;
     margin: 0 auto;
-    margin-bottom: clamp(112px, 9vw, 144px);
+    margin-bottom: clamp(120px, 10vw, 200px);
 }
 .food-wrap{
     display: flex;
@@ -872,7 +871,7 @@ main{
     width: calc(100% - 60px);
     max-width: 1440px;
     margin: 0 auto;
-    margin-bottom: clamp(112px, 9vw, 144px);
+    margin-bottom: clamp(120px, 10vw, 200px);
 }
 .brands-tab{
     display: flex;
@@ -945,19 +944,17 @@ main{
     object-position: center bottom;
     cursor: pointer;
 }
-/* 스크롤 진입 후 현재 탭의 브랜드 이미지만 공개 */
-.brands-content.reveal-ready .brands-img > img{
-    clip-path: inset(100% 0 0 0);
+.brands-content > ul.active .brands-img img {
+    animation: brands-up 0.6s ease both;
 }
-.brands-content.is-visible > ul.active .brands-img > img{
-    animation: brand-reveal 0.9s ease both;
-}
-@keyframes brand-reveal{
-    0%{
-        clip-path: inset(100% 0 0 0);
+@keyframes brands-up {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
     }
-    100%{
-        clip-path: inset(0 0 0 0);
+    100% {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 .brands-content > ul:nth-child(2) > li:first-child .brands-img > img{
@@ -977,14 +974,14 @@ main{
     width: clamp(140px, 15vw, 200px);
     max-width: 100%;
     margin: 0 auto;
-    text-align: left;
+    text-align: center;
 }
 .brands-content ul li .brands-text > h3{
     position: relative;
     width: fit-content;
     max-width: 100%;
-    margin-left: 0;
-    margin-right: 0;
+    margin-left: auto;
+    margin-right: auto;
     font-size: clamp(1rem, 1.8vw, 1.5rem);
     line-height: 1.4;
     margin-top: clamp(12px, 2vw, 20px);
@@ -1693,7 +1690,7 @@ main{
         min-height: 2.8em;
         display: flex;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: center;
         margin-top: clamp(12px, 3vw, 18px);
     }
     .brands-content ul li .brands-text > p{
