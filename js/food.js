@@ -1,43 +1,31 @@
 $(document).ready(function(){
-    // Core 카드 목록이 화면에 들어오면 한 번 실행
-    let coreList = document.querySelector(".core-wrap > ul");
+    // 스크롤 위치로 Core와 브랜드 애니메이션 실행
+    let coreList = $(".core-wrap > ul");
+    let brandArea = $(".brands-content");
 
-    if(coreList && "IntersectionObserver" in window){
-        let coreObserver = new IntersectionObserver(function(entries){
-            entries.forEach(function(entry){
-                if(entry.isIntersecting){
-                    entry.target.classList.add("is-visible");
-                    coreObserver.unobserve(entry.target);
-                }
-            });
-        }, {
-            rootMargin: "0px 0px -10% 0px",
-            threshold: 0
-        });
+    brandArea.addClass("reveal-ready");
 
-        coreObserver.observe(coreList);
+    function scrollSpy(){
+        let scrollTop = $(window).scrollTop();
+        let windowHeight = $(window).height();
+        // 화면 높이의 90% 지점까지 들어오면 실행
+        let showPoint = scrollTop + windowHeight * 0.9;
+
+        if(coreList.is(":visible") && !coreList.hasClass("is-visible")){
+            if(showPoint >= coreList.offset().top){
+                coreList.addClass("is-visible");
+            }
+        }
+
+        if(brandArea.is(":visible") && !brandArea.hasClass("is-visible")){
+            if(showPoint >= brandArea.offset().top){
+                brandArea.addClass("is-visible");
+            }
+        }
     }
 
-    // 브랜드 이미지 영역이 화면에 들어오면 한 번 실행
-    let brandArea = document.querySelector(".brands-content");
-
-    if(brandArea && "IntersectionObserver" in window){
-        brandArea.classList.add("reveal-ready");
-
-        let brandObserver = new IntersectionObserver(function(entries){
-            entries.forEach(function(entry){
-                if(entry.isIntersecting){
-                    entry.target.classList.add("is-visible");
-                    brandObserver.unobserve(entry.target);
-                }
-            });
-        }, {
-            rootMargin: "0px 0px -10% 0px",
-            threshold: 0
-        });
-
-        brandObserver.observe(brandArea);
-    }
+    $(window).on("scroll resize load", scrollSpy);
+    scrollSpy();
 
     // 1024px 이하 히어로 로고 캐러셀
     let heroIndex = 0;
